@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import router from './router';
 
 const app = express();
 app.use(cors(
@@ -28,4 +29,5 @@ mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
 mongoose.connection.on('connection',(stream)=>{console.log('Client connected');});
 mongoose.connection.on('error',(error: Error)=>{console.log(error);});
+app.use('/',router());
 console.log("Hello Node.")
